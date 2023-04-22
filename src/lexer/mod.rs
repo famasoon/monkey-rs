@@ -58,8 +58,8 @@ impl Lexer {
             Some('>') => token::Token::Gt,
             None => token::Token::Eof,
             Some('"') => token::Token::String(self.read_string()),
-            Some('[') => token::Token::LBacket,
-            Some(']') => token::Token::RBacket,
+            Some('[') => token::Token::LBracket,
+            Some(']') => token::Token::RBracket,
             Some(':') => token::Token::Colon,
             Some(c) => {
                 if Lexer::is_letter(c) {
