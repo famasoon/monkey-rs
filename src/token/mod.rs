@@ -64,4 +64,39 @@ pub fn token_from_literal(lieral: String) -> Token {
         "macro" => Token::Macro,
         _ => Token::Ident(lieral),
     }
+
+    pub fn string_from_token(token: Token) -> String {
+        match token {
+            Token::Let => String::from("let"),
+            Token::Function => String::from("fn"),
+            Token::Boolean(true) => String::from("true"),
+            Token::Boolean(false) => String::from("false"),
+            Token::Return => String::from("return"),
+            Token::If => String::from("if"),
+            Token::Else => String::from("else"),
+            Token::Assign => String::from("="),
+            Token::Plus => String::from("+"),
+            Token::Minus => String::from("-"),
+            Token::Bang => String::from("!"),
+            Token::Asterisk => String::from("*"),
+            Token::Slash => String::from("/"),
+            Token::LT => String::from("<"),
+            Token::GT => String::from(">"),
+            Token::Comma => String::from(","),
+            Token::Semicolon => String::from(";"),
+            Token::LParen => String::from("("),
+            Token::RParen => String::from(")"),
+            Token::LBrace => String::from("{"),
+            Token::RBrace => String::from("}"),
+            Token::Equal => String::from("=="),
+            Token::NotEqual => String::from("!="),
+            Token::Int(d) => format!("{}", d),
+            Token::String(s) => s,
+            Token::LBracket => String::from("["),
+            Token::RBracket => String::from("]"),
+            Token::Colon => String::from(":"),
+            Token::Macro => String::from("macro"),
+            _ => String::from(""),
+        }
+    }
 }
