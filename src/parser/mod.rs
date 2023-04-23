@@ -465,8 +465,4 @@ impl Parser {
             t, self.peek_token
         ));
     }
-
-    pub fn get_errors(&self) -> &Vec<String> {
-        &self.errors
-    }
 }

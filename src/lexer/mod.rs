@@ -126,14 +126,14 @@ impl Lexer {
             return str1;
         }
 
-        str1.push(self.ch.unwrap()).clone();
+        str1.push(self.ch.unwrap());
         loop {
             self.read_char();
             if self.ch.unwrap() == '"' || self.ch.unwrap() == '\0' {
                 self.read_char();
                 break;
             }
-            str1.push(self.ch.unwrap()).clone();
+            str1.push(self.ch.unwrap());
         }
 
         str1
