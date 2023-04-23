@@ -115,6 +115,8 @@ pub fn modify_expression(
 
 #[cfg(test)]
 mod tests {
+    use crate::token;
+
     use super::*;
 
     #[test]
