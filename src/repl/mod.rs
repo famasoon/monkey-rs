@@ -1,0 +1,29 @@
+use crate::eval;
+use crate::lexer;
+use crate::object;
+use crate::parser;
+use std::io::{self, stdin, Write};
+
+pub fn start() {
+    let mut env = object::environment::Environment::new();
+    let mut macro_env = object::environment::Environment::new();
+    loop {
+        print!(">> ");
+        io::stdout().flush().unwrap();
+
+        let mut s = String::new();
+        stdin().read_line(&mut s).expect("failed to read stdin");
+
+        let l = lexer::Lexer::new(s);
+
+        let mut p = parser::Parser::new(l);
+        let mut program = p.parse_program().unwrap();
+
+        eval::macro_expansion::define_macros(&mut program, &mut macro_env);
+        let expanded = eval::macro_expansion::expand_macros(&mut program, &mut macro_env);
+
+        let evaluated = eval::eval(expanded, &mut env).unwrap();
+
+        println!("{}", evaluated.inspect());
+    }
+}

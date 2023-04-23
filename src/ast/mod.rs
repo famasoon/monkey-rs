@@ -67,7 +67,7 @@ impl fmt::Display for Expression {
                 format!("({} {} {})", token::string_from_token(t.clone()), e1, e2)
             }
             Expression::If(e, s1, s2) => {
-                let mut string = format!("if {} {{{}}}", e, s1);
+                let string = format!("if {} {{{}}}", e, s1);
                 let string2 = match s2 {
                     Some(s) => format!(" else {{{}}}", s),
                     None => String::from(""),

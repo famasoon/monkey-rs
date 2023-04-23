@@ -1,6 +1,5 @@
 use crate::ast;
 use crate::object::environment::Environment;
-use crate::token;
 
 pub fn modify(
     p: &mut ast::Program,

@@ -16,7 +16,7 @@ impl Lexer {
             ch: None,
         };
         l.read_char();
-        return  l;
+        return l;
     }
 
     pub fn next_token(&mut self) -> token::Token {
