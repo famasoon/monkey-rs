@@ -40,14 +40,14 @@ pub enum Expression {
     Block(Vec<Box<Statement>>),
     Prefix(token::Token, Box<Expression>),
     Infix(token::Token, Box<Expression>, Box<Expression>),
-    If(Box<Expression>, Box<Statement>, Option<Box<Statement>>),
-    Function(Vec<Box<Expression>>, Box<Statement>),
+    If(Box<Expression>, Box<Expression>, Option<Box<Expression>>),
+    Function(Vec<Box<Expression>>, Box<Expression>),
     Call(Box<Expression>, Vec<Box<Expression>>),
     Ident(String),
     Array(Vec<Box<Expression>>),
     Index(Box<Expression>, Box<Expression>),
     Hashmap(Vec<HashItem>),
-    Macro(Vec<Box<Expression>>, Box<Statement>),
+    Macro(Vec<Box<Expression>>, Box<Expression>),
 }
 
 impl fmt::Display for Expression {
@@ -62,7 +62,9 @@ impl fmt::Display for Expression {
                 string
             }
             Expression::Prefix(t, e) => format!("({}{})", token::string_from_token(t.clone()), e),
-            Expression::Infix(t, e1, e2) => format!("({} {} {})",token::string_from_token(t.clone()), e1, e2),
+            Expression::Infix(t, e1, e2) => {
+                format!("({} {} {})", token::string_from_token(t.clone()), e1, e2)
+            }
             Expression::If(e, s1, s2) => {
                 let mut string = format!("if {} {{{}}}", e, s1);
                 let string2 = match s2 {
@@ -135,4 +137,22 @@ impl fmt::Display for Statement {
 #[derive(Debug, PartialEq, Clone, Eq)]
 pub struct Program {
     pub statements: Vec<Box<Statement>>,
+}
+
+impl Program {
+    pub fn new() -> Program {
+        Program {
+            statements: Vec::new(),
+        }
+    }
+}
+
+impl fmt::Display for Program {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let mut string = String::new();
+        for s in self.statements.iter() {
+            string.push_str(&format!("{}", s));
+        }
+        write!(f, "{}", string)
+    }
 }
